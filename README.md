@@ -1,5 +1,5 @@
-puppet
-======
+ruby
+====
 
 This installs the Ruby language runtime.
 
