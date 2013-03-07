@@ -3,28 +3,23 @@
 # Creates a system-wide gem resource file.
 #
 class ruby::gemrc(
-  $path='/etc/gemrc',
-  $rdoc=false,
-  $ri=false,
-) {
-  # Set the binary directory for ruby gems so they are in the system PATH.
+  $bindir   = $ruby::params::gem_bindir,
+  $path     = $ruby::params::gem_conf,
+  $rdoc     = $ruby::params::gem_rdoc,
+  $ri       = $ruby::params::gem_ri,
+  $owner    = 'root',
+  $template = 'ruby/gemrc.erb',
+) inherits ruby::params {
+  # So we can know the root group of the platform.
   include sys
-  case $::operatingsystem {
-    openbsd: {
-      $bindir = '/usr/local/bin'
-    }
-    default: {
-      $bindir = '/usr/bin'
-    }
-  }
 
   # Default gem resource file.
   file { $path:
-    ensure    => file,
-    owner     => 'root',
-    group     => $sys::root_group,
-    mode      => '0644',
-    content   => template('ruby/gemrc.erb'),
-    require   => Package['ruby'],
+    ensure  => file,
+    owner   => $owner,
+    group   => $sys::root_group,
+    mode    => '0644',
+    content => template($template),
+    require => Package['ruby'],
   }
 }

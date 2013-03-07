@@ -13,9 +13,7 @@ class ruby::params {
       $gemhome = '/usr/local/lib/ruby/gems/1.8/gems'
     }
     solaris: {
-      if $::operatingsystemrelease < '5.11' {
-        fail("Ruby supported only on Solaris (and variants) 5.11 and above.\n")
-      }
+      include sys::solaris
       $package  = 'runtime/ruby-18'
       $provider = 'pkg'
       $gemhome  = '/var/ruby/1.8/gem_home/gems'
@@ -49,4 +47,10 @@ class ruby::params {
       fail("Do not know how to install/configure Ruby on ${::osfamily}.\n")
     }
   }
+
+  # Default parameters for gems.
+  $gem_bindir = '/usr/local/bin'
+  $gem_conf   = '/etc/gemrc'
+  $gem_rdoc   = false
+  $gem_ri     = false
 }
