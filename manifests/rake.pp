@@ -3,9 +3,9 @@
 # Installs RAKE, a simple ruby build program similar to make.
 #
 class ruby::rake(
-  $package='rake',
-  $version='installed',
-  $provider='gem',
+  $package  = 'rake',
+  $version  = 'installed',
+  $provider = 'gem',
 ) {
   include ruby
   package { $package:
