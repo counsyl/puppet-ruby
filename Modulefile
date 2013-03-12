@@ -1,10 +1,10 @@
 name    'counsyl-ruby'
 version '1.0.0'
-source 'git://github.counsyl.com/justin/counsyl-ruby.git'
-author 'counsyl'
+source 'git://github.com/counsyl/puppet-ruby.git'
+author 'Counsyl, Inc.'
 license 'Apache License, Version 2.0'
 summary 'Installs the Ruby language runtime'
 description 'Installs the Ruby language runtime'
-project_page 'https://github.counsyl.com/justin/counsyl-ruby'
+project_page 'https://github.com/counsyl/puppet-ruby'
 
 dependency 'counsyl/sys', '>= 1.0.0'
