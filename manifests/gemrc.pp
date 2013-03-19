@@ -8,6 +8,7 @@ class ruby::gemrc(
   $rdoc     = $ruby::params::gem_rdoc,
   $ri       = $ruby::params::gem_ri,
   $owner    = 'root',
+  $sources  = ['https://rubygems.org/'],
   $template = 'ruby/gemrc.erb',
 ) inherits ruby::params {
   # So we can know the root group of the platform.
