@@ -49,8 +49,9 @@ class ruby::params {
   }
 
   # Default parameters for gems.
-  $gem_bindir = '/usr/local/bin'
-  $gem_conf   = '/etc/gemrc'
-  $gem_rdoc   = false
-  $gem_ri     = false
+  $gem_bindir  = '/usr/local/bin'
+  $gem_conf    = '/etc/gemrc'
+  $gem_rdoc    = false
+  $gem_ri      = false
+  $gem_sources = ['https://rubygems.org/']
 }
