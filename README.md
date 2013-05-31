@@ -1,7 +1,8 @@
 ruby
 ====
 
-This installs the Ruby language runtime.
+This Puppet module installs and configures the Ruby language runtime and popular
+Ruby packages.
 
 License
 -------
@@ -16,4 +17,4 @@ Justin Bronn <justin@counsyl.com>
 Support
 -------
 
-Please log tickets and issues at https://github.counsyl.com/justin/counsyl-ruby
+Please log tickets and issues at https://github.counsyl.com/dev/puppet-ruby
