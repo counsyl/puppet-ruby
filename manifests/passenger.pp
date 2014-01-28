@@ -6,7 +6,7 @@
 class ruby::passenger(
   $package  = 'passenger',
   $provider = 'gem',
-  $version  = '4.0.33',
+  $version  = '4.0.36',
 ) {
   include ruby::rack
   include ruby::rake
