@@ -9,8 +9,15 @@ class ruby::params {
       $package = 'ruby'
       $ensure  = $sys::openbsd::pkg::ruby
       $source  = $sys::openbsd::pkg::source
-      $gems    = 'ruby-gems'
-      $gemhome = '/usr/local/lib/ruby/gems/1.8/gems'
+      if versioncmp($::kernelmajversion, '5.4') >= 0 {
+        $gems = false
+        $gemhome = '/usr/local/lib/ruby/gems/1.9.1/gems'
+        $suffix = '19'
+      } else {
+        $gems = 'ruby-gems'
+        $gemhome = '/usr/local/lib/ruby/gems/1.8/gems'
+        $suffix = '18'
+      }
     }
     solaris: {
       include sys::solaris

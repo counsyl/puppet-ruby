@@ -1,4 +1,8 @@
-class ruby::openbsd {
+# == Class: ruby::openbsd
+#
+# Symbolic links to make Ruby easier on OpenBSD.
+#
+class ruby::openbsd inherits ruby::params {
   File {
     owner   => 'root',
     group   => 'wheel',
@@ -8,31 +12,30 @@ class ruby::openbsd {
   # the default Ruby interpreter.
   file { '/usr/local/bin/ruby':
     ensure  => link,
-    target  => '/usr/local/bin/ruby18',
+    target  => "/usr/local/bin/ruby${suffix}",
   }
   file { '/usr/local/bin/erb':
     ensure  => link,
-    target  => '/usr/local/bin/erb18',
+    target  => "/usr/local/bin/erb${suffix}",
   }
   file { '/usr/local/bin/irb':
     ensure  => link,
-    target  => '/usr/local/bin/irb18',
+    target  => "/usr/local/bin/irb${suffix}",
   }
   file { '/usr/local/bin/rdoc':
     ensure  => link,
-    target  => '/usr/local/bin/rdoc18',
+    target  => "/usr/local/bin/rdoc${suffix}",
   }
   file { '/usr/local/bin/ri':
     ensure  => link,
-    target  => '/usr/local/bin/ri18',
+    target  => "/usr/local/bin/ri${suffix}",
   }
   file { '/usr/local/bin/testrb':
     ensure  => link,
-    target  => '/usr/local/bin/testrb18',
+    target  => "/usr/local/bin/testrb${suffix}",
   }
   file { '/usr/local/bin/gem':
     ensure  => link,
-    target  => '/usr/local/bin/gem18',
-    require => Package['gems'],
+    target  => "/usr/local/bin/gem${suffix}",
   }
 }
