@@ -3,9 +3,9 @@
 # Installs Rack: a Ruby Webserver interface
 #
 class ruby::rack(
-  $package='rack',
-  $version='installed',
-  $provider='gem',
+  $package  = 'rack',
+  $version  = 'installed',
+  $provider = 'gem',
 ) {
   include ruby
   package { $package:
