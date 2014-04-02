@@ -2,11 +2,12 @@
 #
 # Installs the Ruby development headers.
 #
-class ruby::devel {
-  include ruby::params
-  if $ruby::params::devel {
+class ruby::devel(
+  $package = $ruby::params::devel,
+) inherits ruby::params {
+  if $package {
     include sys::gcc
-    package { $ruby::params::devel:
+    package { $package:
       ensure  => installed,
       alias   => 'ruby-devel',
       require => Class['sys::gcc'],
