@@ -26,23 +26,39 @@ class ruby::params {
       $gemhome  = '/var/ruby/1.8/gem_home/gems'
     }
     debian: {
-      $package = 'ruby1.8'
-      $gems    = 'rubygems'
-      $gemhome = '/var/lib/gems/1.8/gems'
-      $devel   = "${package}-dev"
-
-      # The `libopenssl-ruby` package was merged into `libruby`
-      # in Debian 6/Ubuntu 11.
+      # There have been multiple changes to default Ruby packages over
+      # the years, set up different comparison variables based on LSB
+      # major release numbers.
       if $::operatingsystem == 'Ubuntu' {
-        $lsb_compare = '11'
+        $libruby_compare = '11'
+        $ruby18_compare = '12'
       } else {
-        $lsb_compare = '6'
+        $libruby_compare = '6'
+        $ruby18_compare = '6'
       }
-      if versioncmp($::lsbmajdistrelease, $lsb_compare) >= 0 {
-        $extras  = ['libruby', "libshadow-${package}"]
+
+      if versioncmp($::lsbmajdistrelease, $ruby18_compare) > 0 {
+        $package_version = '1.9.1'
+        $gems = false
+        $libruby = 'libruby'
+        $libshadow = 'ruby-shadow'
       } else {
-        $extras  = ['libopenssl-ruby', "libshadow-${package}"]
+        $package_version = '1.8'
+        $gems = 'rubygems'
+        $libshadow = "libshadow-ruby${package_version}"
+        # The `libopenssl-ruby` package was merged into `libruby`
+        # in Debian 6/Ubuntu 11.
+        if versioncmp($::lsbmajdistrelease, $libruby_compare) >= 0 {
+          $libruby = 'libruby'
+        } else {
+          $libruby = 'libopenssl-ruby'
+        }
       }
+
+      $package = "ruby${package_version}"
+      $gemhome = "/var/lib/gems/${package_version}/gems"
+      $devel   = "${package}-dev"
+      $extras  = [$libruby, $libshadow]
     }
     redhat: {
       $package = 'ruby'
