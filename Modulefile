@@ -1,5 +1,5 @@
 name    'counsyl-ruby'
-version '0.9.8'
+version '0.9.9'
 source  'git://github.com/counsyl/puppet-ruby.git'
 author  'Counsyl, Inc.'
 license 'Apache License, Version 2.0'
