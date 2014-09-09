@@ -37,7 +37,11 @@ class ruby::params {
         $ruby18_compare = '6'
       }
 
-      if versioncmp($::lsbmajdistrelease, $ruby18_compare) > 0 {
+      # Facter 2.2+ changed lsbmajdistrelease fact, e.g., now returns
+      # '12.04' instead of '12' for Ubuntu precise.
+      $lsb_major_release = regsubst($::lsbmajdistrelease, '^(\d+).*', '\1')
+
+      if versioncmp($lsb_major_release, $ruby18_compare) > 0 {
         $package_version = '1.9.1'
         $gems = false
         $libruby = 'libruby'
@@ -48,7 +52,7 @@ class ruby::params {
         $libshadow = "libshadow-ruby${package_version}"
         # The `libopenssl-ruby` package was merged into `libruby`
         # in Debian 6/Ubuntu 11.
-        if versioncmp($::lsbmajdistrelease, $libruby_compare) >= 0 {
+        if versioncmp($lsb_major_release, $libruby_compare) >= 0 {
           $libruby = 'libruby'
         } else {
           $libruby = 'libopenssl-ruby'
