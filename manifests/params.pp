@@ -31,7 +31,7 @@ class ruby::params {
       # major release numbers.
       if $::operatingsystem == 'Ubuntu' {
         $libruby_compare = '11'
-        $ruby18_compare = '12'
+        $ruby18_compare = '11'
       } else {
         $libruby_compare = '6'
         $ruby18_compare = '6'
