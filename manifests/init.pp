@@ -67,7 +67,12 @@ class ruby (
     }
   }
 
-  # OpenBSD needs some extra files to complete the experience.
+  # Debian and OpenBSD need some extra attention to complete the experience.
+  if $::osfamily == 'Debian' {
+    include ruby::debian
+    Package[$package] -> Class['ruby::debian']
+  }
+
   if $::operatingsystem == 'OpenBSD' {
     include ruby::openbsd
   }
