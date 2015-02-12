@@ -22,6 +22,6 @@ class ruby::gemrc(
     group   => $sys::root_group,
     mode    => '0644',
     content => template($template),
-    require => Package['ruby'],
+    require => Package[$ruby::package],
   }
 }
