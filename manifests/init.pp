@@ -34,7 +34,7 @@ class ruby (
   $source   = $ruby::params::source,
 ) inherits ruby::params {
 
-  if $::operatingsystem == OpenBSD {
+  if $::operatingsystem == 'OpenBSD' {
     $ensure = $ruby::params::ensure
   } else {
     $ensure = 'installed'
@@ -70,7 +70,7 @@ class ruby (
   }
 
   # OpenBSD needs some extra files to complete the experience.
-  if $::operatingsystem == OpenBSD {
+  if $::operatingsystem == 'OpenBSD' {
     include ruby::openbsd
   }
 
