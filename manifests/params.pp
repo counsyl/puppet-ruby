@@ -31,7 +31,7 @@ class ruby::params {
       # major release numbers.
       if $::operatingsystem == 'Ubuntu' {
         $libruby_compare = '11'
-        $ruby18_compare = '12'
+        $ruby18_compare = '11'
       } else {
         $libruby_compare = '6'
         $ruby18_compare = '6'
@@ -45,7 +45,7 @@ class ruby::params {
         $package_version = '1.9.1'
         $gems = false
         $libruby = 'libruby'
-        $libshadow = 'ruby-shadow'
+        $extras = [$libruby]
       } else {
         $package_version = '1.8'
         $gems = 'rubygems'
@@ -57,12 +57,12 @@ class ruby::params {
         } else {
           $libruby = 'libopenssl-ruby'
         }
+        $extras = [$libruby, $libshadow]
       }
 
       $package = "ruby${package_version}"
       $gemhome = "/var/lib/gems/${package_version}/gems"
       $devel   = "${package}-dev"
-      $extras  = [$libruby, $libshadow]
     }
     redhat: {
       $package = 'ruby'

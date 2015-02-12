@@ -6,7 +6,7 @@ class ruby::openbsd inherits ruby::params {
   File {
     owner   => 'root',
     group   => 'wheel',
-    require => Package['ruby'],
+    require => Package[$package],
   }
   # OpenBSD leaves out nice things like symbolic links to
   # the default Ruby interpreter.

@@ -34,7 +34,7 @@ class ruby (
   $source   = $ruby::params::source,
 ) inherits ruby::params {
 
-  if $::operatingsystem == OpenBSD {
+  if $::operatingsystem == 'OpenBSD' {
     $ensure = $ruby::params::ensure
   } else {
     $ensure = 'installed'
@@ -43,7 +43,6 @@ class ruby (
   # The main Ruby package.
   package { $package:
     ensure   => $ensure,
-    alias    => 'ruby',
     provider => $provider,
     source   => $source,
   }
@@ -52,10 +51,9 @@ class ruby (
   if $gems {
     package { $gems:
       ensure    => installed,
-      alias     => 'gems',
       provider  => $provider,
       source    => $source,
-      require   => Package['ruby'],
+      require   => Package[$package],
     }
   }
 
@@ -65,12 +63,17 @@ class ruby (
       ensure   => installed,
       provider => $provider,
       source   => $source,
-      require  => Package['ruby'],
+      require  => Package[$package],
     }
   }
 
-  # OpenBSD needs some extra files to complete the experience.
-  if $::operatingsystem == OpenBSD {
+  # Debian and OpenBSD need some extra attention to complete the experience.
+  if $::osfamily == 'Debian' {
+    include ruby::debian
+    Package[$package] -> Class['ruby::debian']
+  }
+
+  if $::operatingsystem == 'OpenBSD' {
     include ruby::openbsd
   }
 
