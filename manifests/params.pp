@@ -7,17 +7,30 @@ class ruby::params {
     openbsd: {
       include sys::openbsd::pkg
       $package = 'ruby'
-      $ensure  = $sys::openbsd::pkg::ruby
-      $source  = $sys::openbsd::pkg::source
-      if versioncmp($::kernelmajversion, '5.4') >= 0 {
-        $gems = false
-        $gemhome = '/usr/local/lib/ruby/gems/1.9.1/gems'
-        $suffix = '19'
-      } else {
-        $gems = 'ruby-gems'
-        $gemhome = '/usr/local/lib/ruby/gems/1.8/gems'
-        $suffix = '18'
+      $gems = false
+
+      case $::kernelmajversion {
+        '5.7': {
+          $ensure = '2.1.5p0'
+          $gemhome = '/usr/local/lib/ruby/gems/2.1/gems'
+        }
+        '5.6': {
+          $ensure = '2.0.0.481'
+          $gemhome = '/usr/local/lib/ruby/gems/2.0/gems'
+        }
+        '5.5': {
+          $ensure = '1.9.3.484p0'
+          $gemhome = '/usr/local/lib/ruby/gems/1.9.1/gems'
+        }
+        '5.4': {
+          $ensure = '1.9.3.484'
+          $gemhome = '/usr/local/lib/ruby/gems/1.9.1/gems'
+        }
+        default: {
+          fail("Unsupported version of OpenBSD: ${::kernelmajversion}.\n")
+        }
       }
+      $suffix = inline_template("<%= @ensure.split('.')[0..1].join('') %>")
     }
     solaris: {
       include sys::solaris
