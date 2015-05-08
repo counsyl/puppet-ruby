@@ -50,10 +50,10 @@ class ruby (
   # Ruby gems.
   if $gems {
     package { $gems:
-      ensure    => installed,
-      provider  => $provider,
-      source    => $source,
-      require   => Package[$package],
+      ensure   => installed,
+      provider => $provider,
+      source   => $source,
+      require  => Package[$package],
     }
   }
 
