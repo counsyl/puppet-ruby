@@ -3,12 +3,32 @@
   "version": "0.9.11",
   "author": "Counsyl, Inc.",
   "summary": "Installs the Ruby language runtime and popular packages",
-  "license": "Apache License, Version 2.0",
+  "license": "Apache-2.0",
   "source": "git://github.com/counsyl/puppet-ruby.git",
   "project_page": "https://github.com/counsyl/puppet-ruby",
   "issues_url": "https://github.com/counsyl/puppet-ruby/issues",
   "description": "Installs the Ruby language runtime and popular packages",
   "dependencies": [
-    {"name":"counsyl/sys","version_requirement":">= 0.9.12"}
+    {"name":"counsyl/sys","version_requirement":">= 0.9.18 <1.0.0"}
+  ],
+  "operatingsystem_support": [
+      {
+          "operatingsystem": "CentOS"
+      },
+      {
+          "operatingsystem": "Debian"
+      },
+      {
+          "operatingsystem": "OpenBSD"
+      },
+      {
+          "operatingsystem": "RedHat"
+      },
+      {
+          "operatingsystem": "Solaris"
+      },
+      {
+          "operatingsystem": "Ubuntu"
+      }
   ]
 }
