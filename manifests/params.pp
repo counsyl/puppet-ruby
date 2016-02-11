@@ -10,6 +10,10 @@ class ruby::params {
       $gems = false
 
       case $::kernelmajversion {
+        '5.9': {
+          $ensure = '2.2.4'
+          $gemhome = '/usr/local/lib/ruby/gems/2.2/gems'
+        }
         '5.8': {
           $ensure = '2.2.2p0'
           $gemhome = '/usr/local/lib/ruby/gems/2.2/gems'
