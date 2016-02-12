@@ -1,6 +1,6 @@
 {
   "name": "counsyl-ruby",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "author": "Counsyl, Inc.",
   "summary": "Installs the Ruby language runtime and popular packages",
   "license": "Apache-2.0",

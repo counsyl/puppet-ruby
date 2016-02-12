@@ -1,3 +1,7 @@
+## 0.9.13 (02/12/2016)
+
+ * Add support for OpenBSD 5.8 and 5.9
+
 ## 0.9.12 (05/08/2015)
 
  * Improve OpenBSD compatibility.
