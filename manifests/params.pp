@@ -85,7 +85,7 @@ class ruby::params {
           if versioncmp($lsb_major_release, $libruby23_compare) >= 0 {
             $libruby = 'libruby2.3'
           } else {
-          $libruby = 'libruby'
+            $libruby = 'libruby'
           }
         } else {
           $libruby = 'libopenssl-ruby'
