@@ -66,7 +66,9 @@ class ruby::params {
       if versioncmp($lsb_major_release, $ruby18_compare) > 0 {
         if versioncmp($lsb_major_release, $ruby23_compare) >= 0 {
           $package_version = '2.3'
-        } else { $package_version = '1.9.1'}
+        } else {
+          $package_version = '1.9.1'
+        }
         $gems = false
         $libruby = 'libruby'
         $extras = [$libruby]
