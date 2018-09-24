@@ -57,6 +57,7 @@ class ruby::params {
       } else {
         $libruby_compare = '6'
         $ruby18_compare = '6'
+        $ruby23_compare = '9'
       }
 
       # Facter 2.2+ changed lsbmajdistrelease fact, e.g., now returns
