@@ -52,10 +52,14 @@ class ruby::params {
       # major release numbers.
       if $::operatingsystem == 'Ubuntu' {
         $libruby_compare = '11'
+        $libruby23_compare = '16'
         $ruby18_compare = '11'
+        $ruby23_compare = '16'
       } else {
         $libruby_compare = '6'
+        $libruby23_compare = '9'
         $ruby18_compare = '6'
+        $ruby23_compare = '9'
       }
 
       # Facter 2.2+ changed lsbmajdistrelease fact, e.g., now returns
@@ -63,7 +67,11 @@ class ruby::params {
       $lsb_major_release = regsubst($::lsbmajdistrelease, '^(\d+).*', '\1')
 
       if versioncmp($lsb_major_release, $ruby18_compare) > 0 {
-        $package_version = '1.9.1'
+        if versioncmp($lsb_major_release, $ruby23_compare) >= 0 {
+          $package_version = '2.3'
+        } else {
+          $package_version = '1.9.1'
+        }
         $gems = false
         $libruby = 'libruby'
         $extras = [$libruby]
@@ -74,7 +82,11 @@ class ruby::params {
         # The `libopenssl-ruby` package was merged into `libruby`
         # in Debian 6/Ubuntu 11.
         if versioncmp($lsb_major_release, $libruby_compare) >= 0 {
-          $libruby = 'libruby'
+          if versioncmp($lsb_major_release, $libruby23_compare) >= 0 {
+            $libruby = 'libruby2.3'
+          } else {
+            $libruby = 'libruby'
+          }
         } else {
           $libruby = 'libopenssl-ruby'
         }
