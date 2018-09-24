@@ -53,6 +53,7 @@ class ruby::params {
       if $::operatingsystem == 'Ubuntu' {
         $libruby_compare = '11'
         $ruby18_compare = '11'
+        $ruby23_compare = '16'
       } else {
         $libruby_compare = '6'
         $ruby18_compare = '6'
@@ -63,7 +64,9 @@ class ruby::params {
       $lsb_major_release = regsubst($::lsbmajdistrelease, '^(\d+).*', '\1')
 
       if versioncmp($lsb_major_release, $ruby18_compare) > 0 {
-        $package_version = '1.9.1'
+        if versioncmp($lsb_major_release, $ruby23_compare) > 0 {
+          $package_version = '2.3'
+        } else { $package_version = '1.9.1'}
         $gems = false
         $libruby = 'libruby'
         $extras = [$libruby]
